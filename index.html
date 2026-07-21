@@ -1,1 +1,397 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NKNP STUDIO</title>
 
+<!-- Google Fonts: Orbitron (display), Sora (body), JetBrains Mono (terminal/labels) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================================ -->
+  <!-- ANIMATED BACKGROUND (grid + scanline) — shared across screens -->
+  <!-- ============================================================ -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-scanline" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--a" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--b" aria-hidden="true"></div>
+
+  <!-- ============================================================ -->
+  <!-- AUTH SCREEN : LOGIN / SIGN UP                                 -->
+  <!-- ============================================================ -->
+  <section id="auth-screen" class="auth-screen">
+    <div class="auth-wrap">
+
+      <div class="brand-lockup">
+        <span class="brand-logo">NKNP<span class="brand-logo__accent">STUDIO</span></span>
+        <p class="brand-tag">// SECURE ACCESS TERMINAL</p>
+      </div>
+
+      <div class="auth-card" id="auth-card">
+        <!-- fake terminal titlebar for cyber/hacker feel -->
+        <div class="terminal-bar">
+          <span class="dot dot--1"></span>
+          <span class="dot dot--2"></span>
+          <span class="dot dot--3"></span>
+          <span class="terminal-bar__label">nknp@studio: ~/access</span>
+        </div>
+
+        <div class="auth-slider" id="auth-slider">
+
+          <!-- ---------------- LOGIN FORM ---------------- -->
+          <div class="auth-panel auth-panel--login">
+            <p class="eyebrow">01 // AUTHENTICATE</p>
+            <h1 class="auth-title">Đăng Nhập</h1>
+            <p class="auth-sub">Nhập thông tin tài khoản để tiếp tục.</p>
+
+            <form id="login-form" class="auth-form" novalidate>
+              <div class="field">
+                <label for="login-email">Gmail</label>
+                <div class="input-shell">
+                  <svg class="input-icon" viewBox="0 0 24 24" fill="none"><path d="M3 6.5C3 5.67 3.67 5 4.5 5h15c.83 0 1.5.67 1.5 1.5v11c0 .83-.67 1.5-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-11Z" stroke="currentColor" stroke-width="1.5"/><path d="m4 6 8 7 8-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <input type="email" id="login-email" placeholder="ten@gmail.com" autocomplete="email" required>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="login-password">Mật khẩu</label>
+                <div class="input-shell">
+                  <svg class="input-icon" viewBox="0 0 24 24" fill="none"><rect x="4.5" y="10" width="15" height="10" rx="1.8" stroke="currentColor" stroke-width="1.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required>
+                  <button type="button" class="toggle-eye" data-target="login-password" aria-label="Hiện mật khẩu">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <label class="checkbox-line">
+                <input type="checkbox" id="remember-me" checked>
+                <span class="checkbox-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5 9.5 18 20 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="checkbox-label">Ghi nhớ đăng nhập</span>
+              </label>
+
+              <p class="form-msg" id="login-msg"></p>
+
+              <button type="submit" class="btn-primary">
+                <span>Đăng Nhập</span>
+              </button>
+            </form>
+
+            <p class="switch-line">
+              Chưa có tài khoản?
+              <button type="button" class="link-btn" id="go-signup">Đăng Ký ngay</button>
+            </p>
+          </div>
+
+          <!-- ---------------- SIGN UP FORM ---------------- -->
+          <div class="auth-panel auth-panel--signup">
+            <p class="eyebrow">02 // REGISTER</p>
+            <h1 class="auth-title">Đăng Ký</h1>
+            <p class="auth-sub">Tạo tài khoản mới để truy cập hệ thống.</p>
+
+            <form id="signup-form" class="auth-form" novalidate>
+              <div class="field">
+                <label for="signup-username">Tên người dùng</label>
+                <div class="input-shell">
+                  <svg class="input-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.5"/><path d="M4.5 19.5c1.4-3.4 4.3-5 7.5-5s6.1 1.6 7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <input type="text" id="signup-username" placeholder="Tên hiển thị" autocomplete="username" required>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="signup-email">Gmail</label>
+                <div class="input-shell">
+                  <svg class="input-icon" viewBox="0 0 24 24" fill="none"><path d="M3 6.5C3 5.67 3.67 5 4.5 5h15c.83 0 1.5.67 1.5 1.5v11c0 .83-.67 1.5-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-11Z" stroke="currentColor" stroke-width="1.5"/><path d="m4 6 8 7 8-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <input type="email" id="signup-email" placeholder="ten@gmail.com" autocomplete="email" required>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="signup-password">Mật khẩu</label>
+                <div class="input-shell">
+                  <svg class="input-icon" viewBox="0 0 24 24" fill="none"><rect x="4.5" y="10" width="15" height="10" rx="1.8" stroke="currentColor" stroke-width="1.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <input type="password" id="signup-password" placeholder="Tối thiểu 6 ký tự" autocomplete="new-password" required>
+                  <button type="button" class="toggle-eye" data-target="signup-password" aria-label="Hiện mật khẩu">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <p class="form-msg" id="signup-msg"></p>
+
+              <button type="submit" class="btn-primary">
+                <span>Tạo Tài Khoản</span>
+              </button>
+            </form>
+
+            <p class="switch-line">
+              Đã có tài khoản?
+              <button type="button" class="link-btn" id="go-login">Đăng Nhập</button>
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- HOME SCREEN (shown only after successful auth)                -->
+  <!-- ============================================================ -->
+  <section id="home-screen" class="home-screen hidden">
+
+    <header class="site-header">
+      <div class="header-left">
+        <button type="button" class="hamburger-btn" id="sidebar-open" aria-label="Mở menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <span class="brand-logo brand-logo--sm">NKNP<span class="brand-logo__accent">STUDIO</span></span>
+      </div>
+
+      <div class="header-user">
+        <div class="user-chip">
+          <div class="avatar" id="user-avatar">?</div>
+          <span class="user-name" id="user-name">—</span>
+        </div>
+        <button type="button" class="btn-logout" id="logout-btn">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M15 16l4-4-4-4M19 12H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Đăng Xuất</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ---------------- SIDEBAR DRAWER ---------------- -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <aside class="sidebar" id="sidebar" aria-hidden="true">
+      <div class="sidebar-head">
+        <span class="brand-logo brand-logo--sm">NKNP<span class="brand-logo__accent">STUDIO</span></span>
+        <button type="button" class="sidebar-close" id="sidebar-close" aria-label="Đóng menu">
+          <svg viewBox="0 0 24 24" fill="none"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-group">
+          <button type="button" class="nav-group__toggle">
+            <span>Cài Đặt</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="nav-group__items">
+            <a class="nav-item" href="#" data-group="Cài Đặt" data-label="Hồ Sơ" data-page="profile">Hồ Sơ</a>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <button type="button" class="nav-group__toggle">
+            <span>Nạp Tiền</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="nav-group__items">
+            <a class="nav-item" href="#" data-group="Nạp Tiền" data-label="Nạp Card">Nạp Card</a>
+            <a class="nav-item" href="#" data-group="Nạp Tiền" data-label="Nạp QR">Nạp QR</a>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <button type="button" class="nav-group__toggle">
+            <span>Dịch Vụ</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="nav-group__items">
+            <a class="nav-item" href="#" data-group="Dịch Vụ" data-label="Tính Điểm">Tính Điểm</a>
+            <a class="nav-item" href="#" data-group="Dịch Vụ" data-label="Lineup">Lineup</a>
+            <a class="nav-item" href="#" data-group="Dịch Vụ" data-label="Profile">Profile</a>
+            <a class="nav-item" href="#" data-group="Dịch Vụ" data-label="QR">QR</a>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <button type="button" class="nav-group__toggle">
+            <span>Layouts</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="nav-group__items">
+            <a class="nav-item" href="#" data-group="Layouts" data-label="Bảng Xếp Hạng">Bảng Xếp Hạng</a>
+            <a class="nav-item" href="#" data-group="Layouts" data-label="Lineup">Lineup</a>
+            <a class="nav-item" href="#" data-group="Layouts" data-label="Profile">Profile</a>
+            <a class="nav-item" href="#" data-group="Layouts" data-label="QR">QR</a>
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="home-main">
+      <!-- ---------- TRANG CHỦ (dashboard mặc định) ---------- -->
+      <div class="page-view" id="dashboard-view">
+        <div class="session-readout">
+          <span class="dot-live"></span>
+          SESSION: ACTIVE — <span id="session-user">—</span>
+        </div>
+
+        <h1 class="home-title">Chào mừng trở lại, <span id="home-username" class="accent-text">bạn</span>.</h1>
+
+        <div class="home-cards-grid">
+          <div class="module-card">
+            <p class="eyebrow">SỐ DƯ</p>
+            <h3>Tiền Đã Nạp</h3>
+            <p class="card-value">0 ₫</p>
+          </div>
+          <div class="module-card">
+            <p class="eyebrow">HOẠT ĐỘNG</p>
+            <h3>Lịch Sử Sử Dụng</h3>
+            <p>Chưa có dữ liệu.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---------- TRANG CON (nội dung từ menu sidebar) ---------- -->
+      <div class="page-view hidden" id="content-view">
+        <button type="button" class="btn-back" id="back-to-home">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M15 6 9 12l6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Trang chủ</span>
+        </button>
+
+        <p class="eyebrow" id="page-breadcrumb">—</p>
+        <h1 class="home-title" id="page-title">—</h1>
+
+        <div class="placeholder-box">
+          <p>Nội dung của mục này đang được phát triển và sẽ được cập nhật trong phiên bản kế tiếp.</p>
+        </div>
+      </div>
+
+      <!-- ---------- TRANG HỒ SƠ ---------- -->
+      <div class="page-view hidden" id="profile-view">
+        <button type="button" class="btn-back" id="profile-back">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M15 6 9 12l6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Trang chủ</span>
+        </button>
+
+        <p class="eyebrow">CÀI ĐẶT // HỒ SƠ</p>
+        <h1 class="home-title">Hồ Sơ</h1>
+
+        <div class="profile-grid">
+
+          <!-- Thông tin tài khoản + Số dư -->
+          <div class="profile-col">
+
+            <div class="profile-card">
+              <div class="profile-card__head">
+                <div class="avatar avatar--lg" id="profile-avatar">?</div>
+                <div>
+                  <p class="profile-card__name" id="profile-display-name">—</p>
+                  <p class="profile-card__email" id="profile-display-email">—</p>
+                </div>
+              </div>
+
+              <div class="info-row">
+                <span class="info-label">Gmail</span>
+                <span class="info-value" id="info-email">—</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Ngày tham gia</span>
+                <span class="info-value" id="info-joined">—</span>
+              </div>
+            </div>
+
+            <div class="module-card">
+              <p class="eyebrow">SỐ DƯ</p>
+              <h3>Số Dư Tài Khoản</h3>
+              <p class="card-value" id="info-balance">0 ₫</p>
+            </div>
+
+          </div>
+
+          <!-- Đổi tên + Đổi mật khẩu -->
+          <div class="profile-col">
+
+            <div class="profile-card">
+              <p class="eyebrow">01 // HỒ SƠ</p>
+              <h3 class="profile-card__title">Tên Người Dùng</h3>
+
+              <form id="username-form" class="auth-form" novalidate>
+                <div class="field">
+                  <label for="profile-username">Tên hiển thị</label>
+                  <div class="input-shell">
+                    <svg class="input-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.5"/><path d="M4.5 19.5c1.4-3.4 4.3-5 7.5-5s6.1 1.6 7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <input type="text" id="profile-username" placeholder="Tên hiển thị" required>
+                  </div>
+                </div>
+
+                <p class="form-msg" id="username-msg"></p>
+
+                <button type="submit" class="btn-primary">
+                  <span>Lưu Thay Đổi</span>
+                </button>
+              </form>
+            </div>
+
+            <div class="profile-card">
+              <p class="eyebrow">02 // BẢO MẬT</p>
+              <h3 class="profile-card__title">Đổi Mật Khẩu</h3>
+
+              <form id="password-form" class="auth-form" novalidate>
+                <div class="field">
+                  <label for="current-password">Mật khẩu hiện tại</label>
+                  <div class="input-shell">
+                    <svg class="input-icon" viewBox="0 0 24 24" fill="none"><rect x="4.5" y="10" width="15" height="10" rx="1.8" stroke="currentColor" stroke-width="1.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <input type="password" id="current-password" placeholder="••••••••" autocomplete="current-password" required>
+                    <button type="button" class="toggle-eye" data-target="current-password" aria-label="Hiện mật khẩu">
+                      <svg viewBox="0 0 24 24" fill="none"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="new-password">Mật khẩu mới</label>
+                  <div class="input-shell">
+                    <svg class="input-icon" viewBox="0 0 24 24" fill="none"><rect x="4.5" y="10" width="15" height="10" rx="1.8" stroke="currentColor" stroke-width="1.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <input type="password" id="new-password" placeholder="Tối thiểu 6 ký tự" autocomplete="new-password" required>
+                    <button type="button" class="toggle-eye" data-target="new-password" aria-label="Hiện mật khẩu">
+                      <svg viewBox="0 0 24 24" fill="none"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="confirm-password">Xác nhận mật khẩu mới</label>
+                  <div class="input-shell">
+                    <svg class="input-icon" viewBox="0 0 24 24" fill="none"><rect x="4.5" y="10" width="15" height="10" rx="1.8" stroke="currentColor" stroke-width="1.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <input type="password" id="confirm-password" placeholder="Nhập lại mật khẩu mới" autocomplete="new-password" required>
+                    <button type="button" class="toggle-eye" data-target="confirm-password" aria-label="Hiện mật khẩu">
+                      <svg viewBox="0 0 24 24" fill="none"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <p class="form-msg" id="password-msg"></p>
+
+                <button type="submit" class="btn-primary">
+                  <span>Đổi Mật Khẩu</span>
+                </button>
+              </form>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SCRIPTS — load order matters: storage -> auth -> ui           -->
+  <!-- ============================================================ -->
+  <script src="storage.js"></script>
+  <script src="auth.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
